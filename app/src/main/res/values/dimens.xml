@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="border_radius">32.dp</dimen>
+    <dimen name="button_image_padding">24.dp</dimen>
+    <dimen name="spacer_height">16.dp</dimen>
+</resources>

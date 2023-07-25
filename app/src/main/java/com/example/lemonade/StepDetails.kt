@@ -1,4 +1,4 @@
-package com.example.lemonade.ui.theme
+package com.example.lemonade
 
 data class StepDetails(
     val imageResourceId: Int,

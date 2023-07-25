@@ -1,7 +1,5 @@
 package com.example.lemonade
 
-import com.example.lemonade.ui.theme.StepDetails
-
 object Steps {
     var values: HashMap<Int, StepDetails> = hashMapOf(
         1 to StepDetails(R.drawable.lemon_tree, R.string.tap_lemon_tree, R.string.lemon_tree),

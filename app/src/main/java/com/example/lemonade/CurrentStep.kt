@@ -2,7 +2,6 @@ package com.example.lemonade
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import com.example.lemonade.ui.theme.StepDetails
 
 object CurrentStep {
     private val _id = mutableStateOf(1)
