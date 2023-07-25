@@ -1,13 +1,14 @@
 package com.example.lemonade
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,8 +32,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.lemonade.ui.theme.LemonadeTheme
+import com.example.lemonade.ui.theme.StepDetails
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,15 +48,17 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
+fun Preview(){
+    LemonadeApp()
+}
+
+@Composable
 fun LemonadeApp() {
-    var currentStep by remember { mutableStateOf(1) }
+    val currentStep by remember { mutableStateOf(CurrentStep) }
 
     ButtonAndImage(
-        stepDetails = Steps[currentStep]!!,
-        onClick = {
-            currentStep++
-            if (currentStep==5) currentStep = 1
-        },
+        stepDetails = currentStep.value,
+        onClick = { currentStep.nextStep() },
         modifier = Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center)
@@ -70,18 +75,17 @@ fun ButtonAndImage(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Image(
-            painter = painterResource(stepDetails.imageResourceId),
-            contentDescription = stringResource(stepDetails.imageContent),
-            modifier = Modifier
-                .clickable { onClick.invoke() }
-                .background(
-                    color = MaterialTheme.colorScheme.tertiaryContainer,
-                    shape = RoundedCornerShape(32.dp)
-                )
-                .padding(28.dp)
-
-        )
+        Button(
+            onClick = onClick,
+            shape = RoundedCornerShape(32.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
+        ) {
+            Image(
+                modifier = Modifier.padding(24.dp),
+                painter = painterResource(stepDetails.imageResourceId),
+                contentDescription = stringResource(stepDetails.imageContent),
+            )
+        }
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(stepDetails.stringResourceId)
