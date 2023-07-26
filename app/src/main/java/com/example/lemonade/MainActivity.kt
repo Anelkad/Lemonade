@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -45,7 +46,7 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-fun Preview(){
+fun Preview() {
     LemonadeApp()
 }
 
@@ -93,11 +94,10 @@ fun ButtonAndImage(
         Button(
             onClick = onClick,
             shape = RoundedCornerShape(dimensionResource(R.dimen.border_radius)),
+            contentPadding = PaddingValues(dimensionResource(R.dimen.button_image_padding)),
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)
         ) {
             Image(
-                modifier = Modifier
-                    .padding(dimensionResource(R.dimen.button_image_padding)),
                 painter = painterResource(stepDetails.imageResourceId),
                 contentDescription = stringResource(stepDetails.imageContent),
             )
